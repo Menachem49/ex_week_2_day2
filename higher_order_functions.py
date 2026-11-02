@@ -1,6 +1,16 @@
 #ex_1
 def apply_to_all(numbers, action):
-    pass
+    new_list = []
+    for number in numbers:
+        new_list.append(action(number))
+    return new_list
+
+def double(number):
+    return number * 2
+
+print(apply_to_all([1, 2, 3], double))
+print(apply_to_all([1, 2, 3], lambda n: n * n))
+print(apply_to_all([1.6, 2.4], round))
 
 #ex_2
 prices = [20, 75, 120, 45, 90]
@@ -29,3 +39,14 @@ best_grede = map(lambda student : student[0], sorted(students, key= lambda s: s[
 print("\n".join(list(best_grede)))
 # for student in best_grede:
 #     print(student[1])
+
+#ex_4
+def make_discount(percent):
+    def cal(price):
+        return price * (100 - percent) / 100
+    return cal
+
+ten_off = make_discount(10)
+half_price = make_discount(50)
+print(ten_off(200))
+print(half_price(200))
